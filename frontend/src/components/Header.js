@@ -1,9 +1,28 @@
-import React from "react";
+import {Fragment, useState} from "react";
 import { Link } from "react-router-dom";
 import logo from "../imgs/topbar_logo.png";
 
-const LoggedOutView = () => {
+
+const Header=(props)=>{
+const [LoggedInView, LoggedOutView]=useState({})
+
   return (
+    <Fragment>
+    <nav
+    className="navbar navbar-expand-md navbar-dark"
+    style={{ padding: "0.5rem 2rem" }}
+  >
+    <Link to="/" className="navbar-brand">
+      <img alt="logo" src={logo} />
+    </Link>
+
+    {props.currentUser ? (
+      <LoggedInView currentUser={props.currentUser} />
+    ) : (
+      <LoggedOutView currentUser={props.currentUser} />
+    )}
+  </nav>
+
     <ul className="navbar-nav ml-auto">
       <li className="nav-item">
         <Link to="/login" className="nav-link">
@@ -18,10 +37,6 @@ const LoggedOutView = () => {
       </li>
     </ul>
   );
-};
-
-const LoggedInView = (props) => {
-  return (
     <ul className="navbar-nav ml-auto">
       <li className="nav-item">
         <Link to="/editor" className="nav-link">
@@ -34,7 +49,6 @@ const LoggedInView = (props) => {
           <i className="ion-gear-a"></i>&nbsp;Settings
         </Link>
       </li>
-
       <li className="nav-item">
         <Link to={`/@${props.currentUser.username}`} className="nav-link">
           <img
@@ -46,28 +60,6 @@ const LoggedInView = (props) => {
         </Link>
       </li>
     </ul>
-  );
-};
-
-class Header extends React.Component {
-  render() {
-    return (
-      <nav
-        className="navbar navbar-expand-md navbar-dark"
-        style={{ padding: "0.5rem 2rem" }}
-      >
-        <Link to="/" className="navbar-brand">
-          <img alt="logo" src={logo} />
-        </Link>
-
-        {this.props.currentUser ? (
-          <LoggedInView currentUser={this.props.currentUser} />
-        ) : (
-          <LoggedOutView currentUser={this.props.currentUser} />
-        )}
-      </nav>
-    );
-  }
-}
-
+    </Fragment>
+)}
 export default Header;

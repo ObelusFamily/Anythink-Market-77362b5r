@@ -36,7 +36,7 @@ const [LoggedInView, LoggedOutView]=useState({})
         </Link>
       </li>
     </ul>
-  );
+
     <ul className="navbar-nav ml-auto">
       <li className="nav-item">
         <Link to="/editor" className="nav-link">
